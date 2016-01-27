@@ -22,6 +22,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>Cardea-ejb</artifactId>
             <version>${project.version}</version>
+            <!--<scope>provided</scope>-->
         </dependency>
     </dependencies>
 	
@@ -40,12 +41,75 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>rocks.huwi.cardea.groupupdate.TUI</mainClass>
+                            <mainClass>rocks.huwi.cardea.addressupload.TUI</mainClass>
+                            <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
+            
+            <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <version>2.6</version>
+    <configuration>
+        <!--<descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>-->
+         <descriptors>
+            <descriptor>src/assembly/descriptor.xml</descriptor>
+        </descriptors>
+        <archive>
+            <manifest>
+                <mainClass>rocks.huwi.cardea.addressupload.TUI</mainClass>
+                <!-- <packageName>rocks.huwi.cardea.addressupload</packageName> -->
+                <addClasspath>true</addClasspath>
+            </manifest>
+        </archive>
+    </configuration>
+    <executions>
+        <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+                <goal>single</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
           
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                     <artifactSet>
+                        <excludes>
+                            <exclude>rocks.huwi.cardea:Cardea-ejb</exclude>
+                        </excludes>
+                    </artifactSet> 
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+            
         </plugins>
     </build>
 	

@@ -1,4 +1,4 @@
-package rocks.huwi.cardea;
+package rocks.huwi.cardea.addressupload;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,13 +11,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import rocks.huwi.cardea.UploadSessionBeanRemote;
 
 /**
  * CLI to choose Excel file and upload it to remote EJB
  *
  * @author marc
  */
-public class UploadExcel {
+public class TUI {
 
     Properties properties;
     InitialContext ctx;
@@ -30,7 +31,7 @@ public class UploadExcel {
             //props.put("java.naming.factory.url.pkgs", "org.jboss.naming:org.jnp.interfaces");
             //props.put("java.naming.provider.url", "localhost");
         } catch (IOException ex) {
-            Logger.getLogger(UploadExcel.class.getName()).log(Level.SEVERE, "Could not load the config.properties file.", ex);
+            Logger.getLogger(TUI.class.getName()).log(Level.SEVERE, "Could not load the config.properties file.", ex);
         }
 
 //        Hashtable<String, String> hashTable = new Hashtable<>();
@@ -47,7 +48,7 @@ public class UploadExcel {
     }
 
     public static void main(String[] args) {
-        UploadExcel upload = new UploadExcel();
+        TUI upload = new TUI();
         upload.run();
     }
 
@@ -83,7 +84,7 @@ public class UploadExcel {
             System.out.println("\nPress Enter to end.");
             System.in.read();
         } catch (NamingException | IOException ex) {
-            Logger.getLogger(UploadExcel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private static final String JNDI_IDENTIFIER_UPLOADBEAN = "java:global/Cardea-ear/Cardea-ejb-1.0-SNAPSHOT/UploadSessionBean";
